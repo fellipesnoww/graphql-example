@@ -1,6 +1,8 @@
 # GraphQl
 
-Aplicação criada para aplicar os conceitos básicos do GraphQl;
+Aplicação criada para aplicar os conceitos básicos do GraphQl.
+
+[Link da aula](https://www.youtube.com/watch?v=1dz48pReq_c&ab_channel=Rocketseat)
 
 ## Conceitos aplicados
 - O que é o GraphQl;
