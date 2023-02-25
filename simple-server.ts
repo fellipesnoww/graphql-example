@@ -1,20 +1,45 @@
 import {ApolloServer, gql} from "apollo-server";
+import {randomUUID} from "node:crypto";
 
 const typeDefs = gql`
+    type User {
+        id: String!
+        name: String!
+    }
     type Query {
-        helloWorld: String! #O retorno pode ser um texto ou nao existir
+        users: [User!]!
     }
 
-    #type Mutation {}
+    type Mutation {
+        createUser(name: String): User!
+    }
 `;
 
+interface User {
+    id: string;
+    name: string;
+}
+
+
+const users: User[] = [];
 
 const server = new ApolloServer({
     typeDefs, //Quais seriam as rotas
     resolvers: { //Seria como os controllers do rest
         Query: {
-            helloWorld: () => {
-                return "hello world";
+            users: () => {
+                return users;
+            }
+        },
+        Mutation: {
+            createUser: (_, args) => {
+                const newUser = {
+                    id: randomUUID(),
+                    name: args.name,
+                };
+
+                users.push(newUser);
+                return newUser;
             }
         }
     }
